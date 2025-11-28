@@ -931,8 +931,8 @@ async function kiemTraThanhToanSePay() {
 
   // 2. Bắt đầu gọi API
   try {
-    const url = `https://my.sepay.vn/userapi/transactions/list?account_number=${SEPAY_ACCOUNT_NUMBER}&limit=50`;
-
+    const targetUrl = `https://my.sepay.vn/userapi/transactions/list?account_number=${SEPAY_ACCOUNT_NUMBER}&limit=50`;
+    const url = `https://corsproxy.io/?` + encodeURIComponent(targetUrl);
     const response = await fetch(url, {
       method: "GET",
       headers: {
