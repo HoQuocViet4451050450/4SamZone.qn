@@ -452,6 +452,7 @@ function addTableDonHang() {
   var listDH = getListDonHang();
   TONGTIEN = 0;
   for (var i = 0; i < listDH.length; i++) {
+    var d = listDH[i];
     var iconThanhToan = "";
     var textThanhToan = "";
     var colorThanhToan = "";
