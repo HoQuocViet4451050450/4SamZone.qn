@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="shortcut icon" href="img/favicon.ico" />
+
+	<title>Thế giới điện thoại</title>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+	 crossorigin="anonymous">
+
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/topnav.css">
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/taikhoan.css">
+	<link rel="stylesheet" href="css/gioHang.css">
+	<link rel="stylesheet" href="css/footer.css">
+	
+	<style>
+		.modal-payment {
+			display: none; 
+			position: fixed; 
+			z-index: 9999; 
+			left: 0; 
+			top: 0; 
+			width: 100%; 
+			height: 100%; 
+			background-color: rgba(0,0,0,0.6); 
+			overflow: auto;
+		}
+		.modal-content-payment {
+			background-color: #fefefe;
+			margin: 5% auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 90%;
+			max-width: 450px;
+			border-radius: 10px;
+			text-align: center;
+			box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+			position: relative;
+			animation: animatetop 0.4s;
+		}
+		@keyframes animatetop {
+			from {top:-300px; opacity:0}
+			to {top:0; opacity:1}
+		}
+		.close-payment {
+			position: absolute;
+			right: 15px;
+			top: 10px;
+			color: #aaa;
+			font-size: 28px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+		.close-payment:hover { color: black; }
+		.btn-confirm-pay {
+			background-color: #17c671;
+			color: white;
+			padding: 12px 25px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 16px;
+			margin-top: 15px;
+			font-weight: bold;
+			transition: 0.3s;
+		}
+		.btn-confirm-pay:hover { background-color: #129e5a; transform: scale(1.05); }
+		.qr-info {
+			text-align: left; 
+			background: #f1f8ff; 
+			padding: 15px; 
+			border-radius: 8px;
+			margin-top: 10px;
+			border: 1px solid #cce5ff;
+		}
+		.qr-info p { margin: 8px 0; font-size: 15px; border-bottom: 1px dashed #ddd; padding-bottom: 5px; }
+		.qr-info p:last-child { border-bottom: none; }
+		.highlight { color: #d0021b; font-weight: bold; font-size: 18px; }
+		.highlight-blue { color: #0056b3; font-weight: bold; font-size: 18px; }
+	</style>
+
+	<script src="data/products.js"></script>
+	<script src="js/classes.js"></script>
+	<script src="js/dungchung.js"></script>
+	<script src="js/giohang.js"></script>
+
+</head>
+
+<body>
+	<script> addTopNav(); </script>
+
+	<section style="min-height: 85vh">
+		<script> addHeader(); </script>
+
+		<table class="listSanPham" > </table>
+		
+	</section> <script>
+		addContainTaiKhoan();
+	</script>
+
+	<div class="footer"><script>addFooter();</script></div>
+
+	<i class="fa fa-arrow-up" id="goto-top-page" onclick="gotoTop()"></i>
+
+	<div id="modalPayment" class="modal-payment">
+		<div class="modal-content-payment">
+			<span class="close-payment" onclick="dongModalThanhToan()">&times;</span>
+			
+			<h2 style="color: #333; margin-bottom: 5px;">Thanh toán đơn hàng</h2>
+			<p style="color: #666; font-size: 14px;">Mở App ngân hàng và quét mã QR bên dưới</p>
+			
+			<div style="margin: 15px 0;">
+				<img id="img-qr-sepay" src="" alt="Đang tạo mã QR..." style="width: 100%; max-width: 280px; border-radius: 8px; border: 1px solid #ddd; padding: 5px;">
+			</div>
+
+			<div class="qr-info">
+				<p>Ngân hàng: <b>BIDV</b></p>
+				<p>Chủ tài khoản: <b>HO QUOC VIET</b></p>
+				<p>Số tài khoản: <b>96247HIDERV</b></p>
+				<p>Số tiền: <span id="pay-amount" class="highlight">0 ₫</span></p>
+				<p>Nội dung CK: <span id="pay-content" class="highlight-blue">...</span></p>
+			</div>
+
+			<p style="font-size: 13px; color: #d9534f; margin-top: 15px; font-style: italic;">
+				*Lưu ý: Nếu không quét mã, vui lòng nhập chính xác <b>Nội dung CK</b>.
+			</p>
+
+			<button class="btn-confirm-pay" onclick="xacNhanDaChuyenKhoan()">
+				<i class="fa fa-check-circle"></i> Tôi đã chuyển khoản xong
+			</button>
+		</div>
+	</div>
+
+</body>
+
+</html>

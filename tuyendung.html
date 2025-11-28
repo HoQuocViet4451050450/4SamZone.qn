@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tuyển dụng - 4SamZone</title>
+    <link rel="shortcut icon" href="img/favicon.ico" />
+
+    <!-- Load font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous">
+
+    <!-- our files -->
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/topnav.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/taikhoan.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/tuyendung.css">
+
+    <!-- js -->
+    <script src="data/products.js"></script>
+    <script src="js/dungchung.js"></script>
+    <script>
+        window.onload = function () {
+            khoiTao();
+            // thêm tags (từ khóa) vào khung tìm kiếm
+            var tags = ["Samsung", "iPhone", "Huawei", "Oppo", "Mobi"];
+            for (var t of tags) addTags(t, "index.html?search=" + t);
+        }
+    </script>
+
+</head>
+
+<body>
+    <script> addTopNav();</script>
+
+    <section style="min-height: 85vh">
+        <script> addHeader(); </script>
+
+        <div class="body-tuyendung">
+            <div class="tuyendung-header">Tuyển dụng</div>
+            <div class="tuyendung-info">
+                <h1 class="tieude">NHÂN VIÊN BÁN HÀNG</h1><br/>
+
+                <b>1. MÔ TẢ</b>
+                <ul class="tuyendung-noidung">
+                    <liChào đón khách hàng, tạo ấn tượng thân thiện, chuyên nghiệp.</li>
+                    <li>Tư vấn các sản phẩm, dịch vụ, chương trình khuyến mãi và hậu mãi của 4SamZone.</li>
+                    <li>Sắp xếp sản phẩm gọn gàng, vệ sinh cửa hàng và đảm bảo trải nghiệm khách hàng tốt nhất.</li>
+                    <li>Cập nhật thông tin về các sản phẩm mới, tính năng, màu sắc, kiểu dáng...</li>
+                </ul>
+
+                <b>2. THỜI GIAN LÀM VIỆC</b>
+                <ul class="tuyendung-noidung">
+                    <li>Từ 18h – 21h30 các ngày trong tuần</li>
+                    <li>Nghỉ 3 ngày/tháng</li>
+                </ul>
+
+                <b>3. ĐỊA ĐIỂM LÀM VIỆC</b>
+                <ul class="tuyendung-noidung">
+                    <li>Phòng Thí nghiệm & Văn phòng 4SamZone, Trường Đại học Quy Nhơn, Quy Nhơn, Bình Định</li>
+                </ul>
+
+                <b>4. YÊU CẦU</b>
+                <ul class="tuyendung-noidung">
+                    <li>Nam/Nữ, tuổi từ 18 - 25.</li>
+                    <li>Thân thiện, năng động, có kỹ năng giao tiếp tốt.</li>
+                    <li>Đam mê công nghệ và thích chăm sóc khách hàng.</li>
+                    <li>Ưu tiên ứng viên đã có kinh nghiệm bán sản phẩm điện thoại hoặc công nghệ.</li>
+                    <li>Số lượng cần tuyển: 2</li>
+                </ul>
+
+                <b>5. QUYỀN LỢI</b>
+                <ul class="tuyendung-noidung">
+                    <li>Thu nhập: 3.000.000 - 4.000.000 VNĐ/tháng</li>
+                    <li>Hoa hồng theo doanh thu bán hàng.</li>
+                    <li>Thưởng theo hiệu quả công việc và sự phát triển của dự án.</li>
+                    <li>Được đào tạo chuyên môn và kỹ năng trước khi làm việc.</li>
+                    <li>Được tiếp xúc với các sản phẩm công nghệ mới nhất.</li>
+                </ul>
+
+                <b>6. LIÊN HỆ</b>
+                <ul class="tuyendung-noidung">
+                    <li>Ứng viên điền thông tin theo link: 
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNjF8wP7v7ocBDVRUFGqRCHrV0lNPky33Sn3GXVgSVYe7dMA/viewform" target="_blank">
+                            <span>Form tuyển dụng 4SamZone</span>
+                        </a>
+                    </li>
+                    <li>Hoặc nộp hồ sơ trực tiếp tại Văn phòng 4SamZone, Trường Đại học Quy Nhơn.</li>
+                    <li>Hoặc gửi CV qua email: <b>4SamZone@gmail.com</b></li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <script> addContainTaiKhoan() </script>
+
+    <div class="footer">
+        <script>addFooter();</script>
+    </div>
+
+    <i class="fa fa-arrow-up" id="goto-top-page" onclick="gotoTop()"></i>
+</body>
+
+</html>

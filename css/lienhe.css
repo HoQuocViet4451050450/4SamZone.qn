@@ -1,0 +1,54 @@
+.body-lienhe {
+	margin: 30px 50px 50px 50px;
+	width : 90%;
+}
+
+.lienhe-header {
+	height      : 40px;
+	font-weight : bold;
+	line-height : 40px;
+	padding-left: 10px;
+	background  : #004aad;
+	color       : white;
+}
+
+.lienhe-info {
+	margin         : 20px auto 0;
+	display        : flex;
+	justify-content: space-between;
+	width          : 100%;
+}
+
+.info-left {
+	width: 48%;
+}
+
+.info-right {
+	width: 48%;
+}
+
+iframe {
+	border: 1px solid gray;
+}
+
+.thongtinnhom {
+	width          : 100%;
+	border-collapse: collapse;
+	margin-top     : 15px;
+}
+
+.thongtinnhom th,
+.thongtinnhom td {
+	border    : 1px solid #0C9;
+	padding   : 5px;
+	text-align: center;
+}
+
+.thongtinnhom th {
+	background-color: #004aad;
+	color           : white;
+}
+
+.thongtinnhom tr:nth-child(even) {
+	background-color: #f2f2f2;
+}

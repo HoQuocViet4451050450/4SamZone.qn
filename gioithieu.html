@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Giới thiệu - 4SamZone</title>
+    <link rel="shortcut icon" href="img/favicon.ico" />
+
+    <!-- Load font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous">
+        
+    <!-- our files -->
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/topnav.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/taikhoan.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/gioithieu.css">
+
+    <!-- js -->
+    <script src="data/products.js"></script>
+    <script src="js/dungchung.js"></script>
+    <script>
+        window.onload = function () {
+            khoiTao();
+            // thêm tags (từ khóa) vào khung tìm kiếm
+            var tags = ["Samsung", "iPhone", "Huawei", "Oppo", "Mobi"];
+            for (var t of tags) addTags(t, "index.html?search=" + t);
+        }
+    </script>
+
+</head>
+
+<body>
+    <script> addTopNav();</script>
+
+    <section style="min-height: 85vh">
+        <script> addHeader(); </script>
+
+        <div class="page-gt">
+            <h4 class="page-header">
+                Giới thiệu
+            </h4>
+            <div class="page-info">
+                <p>Chào mừng bạn đến với <strong>4SamZone</strong> – website được xây dựng bởi sinh viên Khoa Quản trị Kinh doanh, Trường Đại học Quy Nhơn.</p>
+                <br />
+                <p>
+                    4SamZone được thành lập với mục tiêu mang đến cho người dùng những thông tin, đánh giá và trải nghiệm về các sản phẩm điện thoại, đặc biệt là các dòng Samsung. Chúng tôi luôn hướng tới việc tạo ra một nền tảng thân thiện, dễ sử dụng và cung cấp những kiến thức bổ ích về công nghệ di động.<br />
+                    Đội ngũ thực hiện dự án là những sinh viên năng động, sáng tạo và đam mê công nghệ, luôn nỗ lực để cập nhật những thông tin mới nhất và chính xác nhất cho cộng đồng người dùng.<br />
+                    Chúng tôi hy vọng rằng 4SamZone sẽ là nơi chia sẻ hữu ích cho tất cả mọi người, từ những người đam mê công nghệ, sinh viên, cho đến những khách hàng đang tìm hiểu và lựa chọn sản phẩm điện thoại phù hợp.<br />
+                    Xin chân thành cảm ơn tất cả các bạn đã quan tâm, ủng hộ và đồng hành cùng chúng tôi trong quá trình xây dựng và phát triển website này.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script> addContainTaiKhoan(); </script>
+
+    <div class="footer">
+        <script>addFooter();</script>
+    </div>
+
+    <i class="fa fa-arrow-up" id="goto-top-page" onclick="gotoTop()"></i>
+</body>
+
+</html>
