@@ -902,13 +902,35 @@ function progress(percent, bg, width, height) {
 const SEPAY_API_TOKEN =
   "86HHUJQZ1R4VOILEY3MMRTNAAMPH3N0GBFFAPMTQK2YD7XIYXC8CAIVJHEUFL1BV"; // Ví dụ: Bearer CL123...
 const SEPAY_ACCOUNT_NUMBER = "96247HIDERV"; // Số tài khoản ngân hàng của bạn
-
 async function kiemTraThanhToanSePay() {
-  // Thông báo đang xử lý
-  addAlertBox("Đang kết nối SePay...", "#2196F3", "#fff", 2000);
+  // 1. Xử lý hiển thị thông báo (Fix lỗi nodeValue)
+  var divAlert = document.getElementById("alert");
+  if (!divAlert) {
+    divAlert = document.createElement("div");
+    divAlert.id = "alert";
+    divAlert.style.position = "fixed";
+    divAlert.style.right = "20px";
+    divAlert.style.top = "20px";
+    divAlert.style.zIndex = "99999";
+    document.body.appendChild(divAlert);
+  }
 
+  // Thay vì gọi addAlertBox (bị lỗi), ta set trực tiếp innerHTML
+  divAlert.style.display = "block";
+  divAlert.style.padding = "15px";
+  divAlert.style.backgroundColor = "#2196F3"; // Màu xanh dương
+  divAlert.style.color = "white";
+  divAlert.style.borderRadius = "5px";
+  divAlert.innerHTML =
+    '<i class="fa fa-spinner fa-spin"></i> Đang kết nối SePay...';
+
+  // Hàm ẩn thông báo sau 3 giây
+  setTimeout(function () {
+    divAlert.style.display = "none";
+  }, 3000);
+
+  // 2. Bắt đầu gọi API
   try {
-    // Gọi API lấy 50 giao dịch mới nhất
     const url = `https://my.sepay.vn/userapi/transactions/list?account_number=${SEPAY_ACCOUNT_NUMBER}&limit=50`;
 
     const response = await fetch(url, {
@@ -923,29 +945,41 @@ async function kiemTraThanhToanSePay() {
 
     if (data.status && data.status !== 200) {
       alert("Lỗi SePay: " + data.message);
+      divAlert.style.display = "none";
       return;
     }
 
     const transactions = data.transactions;
     let countUpdated = 0;
-    let listUser = getListUser(); // Lấy dữ liệu user từ LocalStorage
+    let listUser = getListUser();
 
     // DUYỆT QUA TẤT CẢ USER VÀ ĐƠN HÀNG
     listUser.forEach((user) => {
       user.donhang.forEach((donHang) => {
-        // Chỉ kiểm tra các đơn có trạng thái "Đang thanh toán"
+        // Chỉ kiểm tra các đơn có trạng thái "Đang thanh toán" hoặc "Chờ xử lý (Đã CK)"
         if (
           donHang.tinhTrang === "Đang thanh toán" ||
           donHang.tinhTrang === "Đang chờ xử lý (Đã CK)"
         ) {
           // Logic so sánh:
-          // 1. Nội dung chuyển khoản chứa Mã Đơn Hàng (VD: DH1701...)
+          // 1. Nội dung chuyển khoản chứa Mã Đơn Hàng
           // 2. Số tiền chuyển khoản >= Tổng tiền đơn hàng
 
+          // Lưu ý: donHang.tongtien đang là chuỗi có dấu chấm (VD: "20.000.000"), cần chuyển về số
+          let tongTienDonHang = stringToNum(donHang.tongtien);
+
           const match = transactions.find((t) => {
+            // Chuyển nội dung CK về chữ hoa để so sánh chính xác hơn
+            let contentCK = t.transaction_content.toUpperCase();
+            let maDon = donHang.maDonHang
+              ? donHang.maDonHang.toUpperCase()
+              : "";
+
+            // Kiểm tra logic
             return (
-              t.transaction_content.includes(donHang.maDonHang) &&
-              parseFloat(t.amount_in) >= parseFloat(donHang.tongTien || 0)
+              maDon &&
+              contentCK.includes(maDon) &&
+              parseFloat(t.amount_in) >= parseFloat(tongTienDonHang)
             );
           });
 
@@ -960,14 +994,21 @@ async function kiemTraThanhToanSePay() {
     if (countUpdated > 0) {
       setListUser(listUser); // Lưu lại LocalStorage
       addTableDonHang(); // Vẽ lại bảng
-      alert(`Thành công! Đã xác nhận thanh toán cho ${countUpdated} đơn hàng.`);
+
+      // Thông báo thành công
+      divAlert.style.backgroundColor = "#4CAF50"; // Màu xanh lá
+      divAlert.innerHTML = `<i class="fa fa-check"></i> Đã xác nhận thanh toán cho ${countUpdated} đơn hàng.`;
     } else {
-      alert("Không tìm thấy giao dịch mới nào khớp với các đơn hàng đang chờ.");
+      // Thông báo không tìm thấy
+      divAlert.style.backgroundColor = "#ff9800"; // Màu cam
+      divAlert.innerHTML = "Không tìm thấy giao dịch mới khớp với đơn hàng.";
     }
   } catch (error) {
     console.error(error);
+    divAlert.style.backgroundColor = "#f44336"; // Màu đỏ
+    divAlert.innerHTML = "Lỗi kết nối API! (Xem Console để biết chi tiết)";
     alert(
-      "Lỗi kết nối! Nếu bạn chạy localhost, hãy cài Extension 'Allow CORS' trên Chrome để test."
+      "Lỗi kết nối! Nếu bạn chạy localhost, trình duyệt có thể chặn request này (CORS/Tracking Prevention)."
     );
   }
 }
